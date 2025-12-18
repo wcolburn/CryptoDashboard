@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
+    <Container>
+      <Box sx={{ my: "5%" }}>
         {children}
       </Box>
     </Container>
