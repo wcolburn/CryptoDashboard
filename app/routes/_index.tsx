@@ -4,11 +4,10 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { getAll } from '~/data';
+import { getCryptoNamesAndSymbols } from '~/data';
 
 export const loader = async () => {
-  const cryptoInfo = await getAll();
+  const cryptoInfo = await getCryptoNamesAndSymbols();
   console.log(cryptoInfo);
   return { cryptoInfo };
 }
@@ -18,27 +17,27 @@ export default function Index() {
   return (
     <React.Fragment>
       <Box
-      sx={{
-        width: '100%',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-        gap: 4,
-      }}
-    >
-          {
-            cryptoInfo.map((crypto) => (
-                <Card>
-                  <CardContent>
-                    <Typography variant='h5'>
-                      {crypto.name ? crypto.name : crypto.symbol}
-                    </Typography>
-                    <Typography variant='body2'>
-                      {crypto.symbol}
-                    </Typography>
-                  </CardContent>
-                </Card>
-            ))
-          }   
+        sx={{
+          width: '100%',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+          gap: 4,
+        }}
+      >
+        {
+          cryptoInfo.map((crypto) => (
+              <Card>
+                <CardContent>
+                  <Typography variant='h5'>
+                    {crypto.name ? crypto.name : crypto.symbol}
+                  </Typography>
+                  <Typography variant='body2'>
+                    {crypto.symbol}
+                  </Typography>
+                </CardContent>
+              </Card>
+          ))
+        }   
       </Box>
     </React.Fragment>
   );

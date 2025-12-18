@@ -13,7 +13,7 @@ export type CryptoInfo = {
     name: string,
 }
 
-export async function getAll(): Promise<CryptoInfo[]> {
+export async function getCryptoNamesAndSymbols(): Promise<CryptoInfo[]> {
     // Fetch from public API
     const url = `http://api.freecryptoapi.com/v1/getCryptoList`;
     const response = await fetch(url, {
