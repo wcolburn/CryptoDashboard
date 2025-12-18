@@ -1,6 +1,8 @@
 import * as React from 'react';
 import type { MetaFunction } from '@remix-run/node';
 import Typography from '@mui/material/Typography';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 export const meta: MetaFunction = () => [
   { title: 'Crypto Dashboard' },
@@ -10,9 +12,16 @@ export const meta: MetaFunction = () => [
 export default function Index() {
   return (
     <React.Fragment>
-      <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-        Material UI Remix in TypeScript example
-      </Typography>
+      <Card>
+        <CardContent>
+          <Typography variant='h5'>
+            Header
+          </Typography>
+          <Typography variant='body2'>
+            Body
+          </Typography>
+        </CardContent>
+      </Card>
     </React.Fragment>
   );
 }
