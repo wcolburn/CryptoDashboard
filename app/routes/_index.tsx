@@ -12,18 +12,23 @@ export const loader = async () => {
 }
 
 export default function Index() {
+  const { cryptoInfo } = useLoaderData<typeof loader>();
   return (
     <React.Fragment>
-      <Card>
-        <CardContent>
-          <Typography variant='h5'>
-            Header
-          </Typography>
-          <Typography variant='body2'>
-            Body
-          </Typography>
-        </CardContent>
-      </Card>
+      {
+        cryptoInfo.map((crypto) => (
+          <Card>
+            <CardContent>
+              <Typography variant='h5'>
+                {crypto.name}
+              </Typography>
+              <Typography variant='body2'>
+                {crypto.symbol}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))
+      }     
     </React.Fragment>
   );
 }
