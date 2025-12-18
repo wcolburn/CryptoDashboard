@@ -3,19 +3,12 @@ import { useLoaderData, } from '@remix-run/react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { getAll } from '~/data';
 
 export const loader = async () => {
-  const url = `http://api.freecryptoapi.com/v1/getCryptoList`;
-  const response = await fetch(url, {
-    headers: {
-      "accept": "*/*",
-      "Authorization": `Bearer ${process.env.API_KEY}`
-    }
-  });
-  const json_data = await response.json();
-  console.log(json_data);
-
-  return [];
+  const cryptoInfo = await getAll();
+  console.log(cryptoInfo);
+  return { cryptoInfo };
 }
 
 export default function Index() {
