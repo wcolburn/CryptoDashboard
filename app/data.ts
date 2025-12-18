@@ -1,4 +1,4 @@
-type CryptoAPIInfo = {
+type CryptoSymbolsAPI = {
     id: string,
     symbol: string,
     name: string,
@@ -7,7 +7,7 @@ type CryptoAPIInfo = {
     history_available_from:string,
 }
 
-type CryptoInfo = {
+type CryptoSymbolsList = {
     id: string,
     symbol: string,
     name: string,
@@ -30,7 +30,22 @@ type ExchangeInfo = {
     exchange_rate_BTC: string
 }
 
-export async function getCryptoNamesAndSymbols(): Promise<CryptoInfo[]> {
+type CryptoInfo = CryptoSymbolsList & ExchangeInfo;
+
+
+export async function getCryptoInfo(): Promise<CryptoInfo[]> {
+    const cryptoNamesAndSymbols: CryptoSymbolsList[] = await getCryptoNamesAndSymbols();
+    const symbolsList = cryptoNamesAndSymbols.map((crypto: CryptoSymbolsList) => crypto.symbol);
+    const cryptoExchangeInfo: ExchangeInfo[] = await getExchangeRates(symbolsList);
+    const cryptoInfoCombined: CryptoInfo[] = cryptoNamesAndSymbols.map((crypto, i) => ({
+        ...crypto,
+        ...cryptoExchangeInfo[i]
+    }));
+    return cryptoInfoCombined;
+}
+
+
+export async function getCryptoNamesAndSymbols(): Promise<CryptoSymbolsList[]> {
     // Fetch from public API
     const url = `http://api.freecryptoapi.com/v1/getCryptoList`;
     const response = await fetch(url, {
@@ -53,7 +68,7 @@ export async function getCryptoNamesAndSymbols(): Promise<CryptoInfo[]> {
     const cryptoData = json_data.result.splice(0, 30);
 
     // Map the crypto info we want into an array and return it
-    const cryptoList: CryptoInfo[] = cryptoData.map((crypto: CryptoAPIInfo) => ({
+    const cryptoList: CryptoSymbolsList[] = cryptoData.map((crypto: CryptoSymbolsAPI) => ({
         id: crypto.id,
         symbol: crypto.symbol,
         name: crypto.name
@@ -61,6 +76,7 @@ export async function getCryptoNamesAndSymbols(): Promise<CryptoInfo[]> {
 
     return cryptoList;
 }
+
 
 export async function getExchangeRates(symbolsToGet: string[]) {
     // Fetch from public API
