@@ -4,12 +4,13 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
-import { getCryptoNamesAndSymbols } from '~/data';
+import { getCryptoNamesAndSymbols, getExchangeRates } from '~/data';
 
 export const loader = async () => {
   const cryptoInfo = await getCryptoNamesAndSymbols();
-  console.log(cryptoInfo);
-  return { cryptoInfo };
+  // console.log(cryptoInfo);
+  const exchangeInfo = await getExchangeRates([]);
+  return { cryptoInfo }
 }
 
 export default function Index() {
@@ -26,7 +27,7 @@ export default function Index() {
       >
         {
           cryptoInfo.map((crypto) => (
-              <Card>
+              <Card key={crypto.id}>
                 <CardContent>
                   <Typography variant='h5'>
                     {crypto.name ? crypto.name : crypto.symbol}
