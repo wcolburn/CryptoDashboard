@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider'
 import { getCryptoInfo } from '~/data';
 
 export const loader = async () => {
@@ -20,22 +21,28 @@ export default function Index() {
         sx={{
           width: '100%',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-          gap: 4,
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+          gap: 3,
         }}
       >
         {
           cryptoInfo.map((crypto) => (
               <Card key={crypto.id}>
                 <CardContent>
-                  <Typography variant='h5'>
+                  <Typography variant='h6'>
                     {crypto.name ? crypto.name : crypto.symbol}
                   </Typography>
-                  <Typography variant='body2'>
+                  <Typography variant='subtitle2'>
                     {crypto.symbol}
                   </Typography>
-                  <Typography variant='body1'>
-                    {crypto.exchange_rate_USD}
+                  </CardContent>
+                  <Divider />
+                <CardContent>
+                  <Typography variant='body1' sx={{ fontFamily: "monospace" }}>
+                    USD: {crypto.exchange_rate_USD}
+                  </Typography>
+                  <Typography variant='body1' sx={{ fontFamily: "monospace" }}>
+                    BTC: {crypto.exchange_rate_BTC}
                   </Typography>
                 </CardContent>
               </Card>
