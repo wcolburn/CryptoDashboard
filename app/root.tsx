@@ -9,6 +9,7 @@ import {
   useRouteError,
   isRouteErrorResponse,
 } from '@remix-run/react';
+import type { MetaFunction } from '@remix-run/node';
 import { withEmotionCache } from '@emotion/react';
 import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/material';
 import theme from './src/theme';
@@ -19,6 +20,11 @@ interface DocumentProps {
   children: React.ReactNode;
   title?: string;
 }
+
+export const meta: MetaFunction = () => [
+  { title: 'Crypto Dashboard' },
+  { name: 'description', content: 'This website displays current cryptocurrency info.' },
+];
 
 const Document = withEmotionCache(({ children, title }: DocumentProps, emotionCache) => {
   const clientStyleData = React.useContext(ClientStyleContext);

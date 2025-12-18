@@ -1,13 +1,22 @@
 import * as React from 'react';
-import type { MetaFunction } from '@remix-run/node';
+import { useLoaderData, } from '@remix-run/react';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
-export const meta: MetaFunction = () => [
-  { title: 'Crypto Dashboard' },
-  { name: 'description', content: 'This website displays current cryptocurrency info.' },
-];
+export const loader = async () => {
+  const url = `http://api.freecryptoapi.com/v1/getCryptoList`;
+  const response = await fetch(url, {
+    headers: {
+      "accept": "*/*",
+      "Authorization": `Bearer ${process.env.API_KEY}`
+    }
+  });
+  const json_data = await response.json();
+  console.log(json_data);
+
+  return [];
+}
 
 export default function Index() {
   return (
