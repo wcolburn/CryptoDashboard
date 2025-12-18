@@ -64,7 +64,7 @@ export async function getCryptoNamesAndSymbols(): Promise<CryptoInfo[]> {
 
 export async function getExchangeRates(symbolsToGet: string[]) {
     // Fetch from public API
-    const url = `http://api.freecryptoapi.com/v1/getData?symbol=ETH+BTC`;
+    const url = `http://api.freecryptoapi.com/v1/getData?symbol=${symbolsToGet.join("+")}`;
     const response = await fetch(url, {
         headers: {
             "accept": "*/*",

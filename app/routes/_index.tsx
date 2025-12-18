@@ -9,7 +9,7 @@ import { getCryptoNamesAndSymbols, getExchangeRates } from '~/data';
 export const loader = async () => {
   const cryptoInfo = await getCryptoNamesAndSymbols();
   // console.log(cryptoInfo);
-  const exchangeInfo = await getExchangeRates([]);
+  const exchangeInfo = await getExchangeRates(['BTC', 'ETH']);
   return { cryptoInfo }
 }
 
