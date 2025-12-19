@@ -1,5 +1,5 @@
-import { getCryptoInfo } from "~/data";
+import { getCryptoInfo } from "~/helpers/fetchFromAPI";
 
 export async function loader() {
-  return await getCryptoInfo(); // uses API key safely
+  return await getCryptoInfo();
 }

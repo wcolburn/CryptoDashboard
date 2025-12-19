@@ -105,7 +105,5 @@ export async function getExchangeRates(symbolsToGet: string[]) {
         exchange_rate_BTC: exchange.last_btc,
     }));
 
-    console.log(exchangeInfoList);
-
     return exchangeInfoList;
 }

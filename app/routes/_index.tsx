@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useFetcher } from '@remix-run/react';
-import { CryptoInfo } from '~/data';
+import { CryptoInfo } from '~/helpers/fetchFromAPI';
 import { WebsiteTitle } from '~/components/websiteTitle';
 import { CryptoCards } from '~/components/cryptoCards';
 import { LoadCryptoInfo } from '~/components/loadCryptoInfo';
@@ -8,7 +8,7 @@ import { RefreshButton } from '~/components/refreshButton';
 
 export default function Index() {
   const fetcher = useFetcher<CryptoInfo[]>();
-  console.log(fetcher.data);
+
   return (
     <React.Fragment>
 
