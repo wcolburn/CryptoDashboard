@@ -34,13 +34,22 @@ export type CryptoInfo = CryptoSymbolsList & ExchangeInfo;
 
 
 export async function getCryptoInfo(): Promise<CryptoInfo[]> {
+
+    if (!process.env.API_KEY) {
+        throw new Error("Missing key for API");
+    }
+
     const cryptoNamesAndSymbols: CryptoSymbolsList[] = await getCryptoNamesAndSymbols();
+
     const symbolsList = cryptoNamesAndSymbols.map((crypto: CryptoSymbolsList) => crypto.symbol);
+
     const cryptoExchangeInfo: ExchangeInfo[] = await getExchangeRates(symbolsList);
+
     const cryptoInfoCombined: CryptoInfo[] = cryptoNamesAndSymbols.map((crypto, i) => ({
         ...crypto,
         ...cryptoExchangeInfo[i]
     }));
+    
     return cryptoInfoCombined;
 }
 
