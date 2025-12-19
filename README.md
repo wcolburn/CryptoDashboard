@@ -9,8 +9,10 @@ Author: Liam Colburn
 npm install
 ```
 
-## Move .env into root
-At the root of the project, either create or copy a `.env` file that contains the `API_KEY` variable.
+## Set up .env
+At the root of the project, create a `.env` file that contains a `API_KEY` variable, or modify the existing `.env.example`.
+
+A key can be easily obtained through https://freecryptoapi.com
 
 ## Start the App
 ```bash
