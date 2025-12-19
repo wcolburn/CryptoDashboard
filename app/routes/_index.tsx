@@ -8,16 +8,20 @@ import { RefreshButton } from '~/components/refreshButton';
 
 export default function Index() {
   const fetcher = useFetcher<CryptoInfo[]>();
+  console.log(fetcher.data);
   return (
     <React.Fragment>
 
       <WebsiteTitle />
 
-      <RefreshButton fetcher={fetcher} />
+      {/* Only display refresh button when there is currently crypto info displayed. */}
+      { fetcher.data !== undefined && fetcher.state !== "loading" && <RefreshButton fetcher={fetcher} /> }
 
+      {/* On initial screen, displays a button to fetch crypto info */}
       <LoadCryptoInfo fetcher={fetcher} />
 
-      {fetcher.data && fetcher.state !== 'loading' && <CryptoCards cryptoInfo={fetcher.data} />}
+      {/* Once the data is loaded, display the crypto info */}
+      { fetcher.data && fetcher.state !== 'loading' && <CryptoCards cryptoInfo={fetcher.data} /> }
       
     </React.Fragment>
   );
