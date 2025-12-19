@@ -30,7 +30,7 @@ type ExchangeInfo = {
     exchange_rate_BTC: string
 }
 
-type CryptoInfo = CryptoSymbolsList & ExchangeInfo;
+export type CryptoInfo = CryptoSymbolsList & ExchangeInfo;
 
 
 export async function getCryptoInfo(): Promise<CryptoInfo[]> {
