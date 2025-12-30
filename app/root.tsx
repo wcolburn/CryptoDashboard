@@ -15,6 +15,7 @@ import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/material';
 import theme from './src/theme';
 import ClientStyleContext from './src/ClientStyleContext';
 import Layout from './src/Layout';
+import { WebsiteTitle } from './components/websiteTitle';
 
 interface DocumentProps {
   children: React.ReactNode;
@@ -78,7 +79,11 @@ export default function App() {
   return (
     <Document>
       <Layout>
+        
+        <WebsiteTitle />
+
         <Outlet />
+
       </Layout>
     </Document>
   );
