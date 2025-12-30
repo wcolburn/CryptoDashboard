@@ -1,17 +1,30 @@
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
-import { FetcherWithComponents } from "@remix-run/react";
-import { CryptoInfo } from "~/helpers/fetchFromAPI";
+import { Link, useNavigation } from "@remix-run/react";
 import RefreshIcon from '@mui/icons-material/Refresh';
+import { CircularProgress } from "@mui/material";
 
-export function RefreshButton(props: { fetcher: FetcherWithComponents<CryptoInfo[]> }) {
+export function RefreshButton() {
+  const navigation = useNavigation();
+
     return (
-        <Box sx={{ display: "flex", justifyContent: "flex-end", }}>
-          <props.fetcher.Form method="post">
-            <IconButton aria-label="refresh" onClick={() => props.fetcher.load("/crypto")}>
-              <RefreshIcon fontSize='large' />
-            </IconButton>
-          </props.fetcher.Form>
+      <Box sx={{ height: 48 }}>
+          <Box sx={{ height: 48,
+            width: 48,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center", 
+          }}>
+            {
+              !navigation.location ?
+                <Link to={'/crypto'}>
+                  <IconButton aria-label="refresh">
+                    <RefreshIcon fontSize='large' />
+                  </IconButton>
+                </Link>
+                : <CircularProgress size='2rem' />
+            }
+          </Box>
         </Box>
     );
 }

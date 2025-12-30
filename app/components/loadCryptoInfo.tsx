@@ -1,23 +1,28 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
-import { FetcherWithComponents } from "@remix-run/react";
-import { CryptoInfo } from "~/helpers/fetchFromAPI";
+import { Link } from "@remix-run/react";
+import { useState } from "react";
 
 // Displays a button on first-load of the website to display the dashboard
-export function LoadCryptoInfo(props: { fetcher: FetcherWithComponents<CryptoInfo[]> }) {
+export function LoadCryptoInfoButton() {
+  const [loading, setLoading] = useState(false);
     return (
-        <Box sx={{ justifyContent: "center", display: "flex", }}>
-        {!props.fetcher.data && props.fetcher.state === "idle" && (
-          <Button
-            variant="contained"
-            onClick={() => props.fetcher.load("/crypto")}
-          >
-            Get Crypto Info
-          </Button>
-        )}
-
-        {props.fetcher.state === "loading" && <CircularProgress />}
+      <Box sx={{ justifyContent: "center", display: "flex", }}>
+        {
+          !loading 
+            ? 
+              <Link to={'/crypto'}>
+                <Button
+                  variant="contained"
+                  onClick={() => setLoading(true)}
+                >
+                  Get Crypto Info
+                </Button>
+              </Link>
+            :
+              <CircularProgress />
+        }
       </Box>
     );
 }
